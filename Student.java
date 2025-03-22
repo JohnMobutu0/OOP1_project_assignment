@@ -10,10 +10,9 @@ public class Student {
     }
 
     // Method to set the student's information
-    public void setStudentInfo(String name, int id, double[] scores) {
+    public void setStudentInfo(String name, int id) {
         this.name = name;
         this.id = id;
-        this.scores = scores;
     }
 
     public void getScore(double[] scores) {
