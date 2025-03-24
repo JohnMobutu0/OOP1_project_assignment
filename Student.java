@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Student {
     // Private attributes
     private String name;
@@ -10,43 +12,37 @@ public class Student {
     }
 
     // Method to set the student's information
-    public void setStudentInfo(String name, int id) {
-        this.name = name;
-        this.id = id;
+    public void setStudentInfo() {
+        Scanner scanner = new Scanner(System.in); // Create a scanner to read input
+
+        System.out.print("Enter student's name: ");
+        this.name = scanner.nextLine(); // Read the name from user input
+
+        System.out.print("Enter student's ID: ");
+        this.id = scanner.nextInt(); // Read the ID from user input
+
+        // Close the scanner after use (good practice)
+        // scanner.close(); // Do not close the scanner here, as we will use it in other methods too.
     }
 
-    public void getScore(double[] scores) {
-        this.scores = scores;
-    }
+    // Method to get the student's scores
+    public void getScore() {
+        Scanner scanner1 = new Scanner(System.in); // Create a new scanner for scores input
 
-    // Getter for the student's name
-    public String getName() {
-        return name;
-    }
+        System.out.print("Enter the number of scores: ");
+        int numScores = scanner1.nextInt(); // Read the number of scores the user wants to enter
 
-    // Setter for the student's name
-    public void setName(String name) {
-        this.name = name;
-    }
+        // Initialize the scores array with the specified size
+        this.scores = new double[numScores];
 
-    // Getter for the student's ID
-    public int getId() {
-        return id;
-    }
+        // Loop to get each score
+        for (int i = 0; i < numScores; i++) {
+            System.out.print("Enter score " + (i + 1) + ": ");
+            this.scores[i] = scanner1.nextDouble(); // Read each score from the user
+        }
 
-    // Setter for the student's ID
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    // Getter for the student's scores
-    public double[] getScores() {
-        return scores;
-    }
-
-    // Setter for the student's scores
-    public void setScores(double[] scores) {
-        this.scores = scores;
+        // Close the scanner after use (good practice)
+        // scanner1.close(); // Again, do not close it here because of repeated usage in the main method.
     }
 
     // Method to calculate the average score
@@ -69,6 +65,23 @@ public class Student {
         }
         System.out.println();
         System.out.println("Average Score: " + calculateAverage());
+        System.out.println("Recommendation: " + getRecommendation());  // Print the recommendation
         System.out.println("-----------------------------");
     }
+
+    // Method to get the recommendation based on the average score
+    public String getRecommendation() {
+        double average = calculateAverage();
+
+        if (average >= 90) {
+            return "Excellent";  // Average score 90 or higher
+        } else if (average >= 70) {
+            return "Good";  // Average score between 70 and 89
+        } else if (average >= 50) {
+            return "Fair";  // Average score between 50 and 69
+        } else {
+            return "Poor";  // Average score below 50
+        }
+    }
+
 }
